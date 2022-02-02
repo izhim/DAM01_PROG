@@ -1,0 +1,64 @@
+import java.util.*;
+import java.util.Scanner;
+import java.time.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+       
+        //  VARIABLES
+
+        int[][] tablaMeses = new int[12][7];
+        int anio;
+        Scanner sc = new Scanner(System.in);
+
+        // CONSTANTES
+
+        final int MESES = 12;
+        
+        
+        //  PROCESAMIENTO
+        
+        System.out.print("Por favor, introduzca el año: ");
+        anio = sc.nextInt();
+        for(int mes = 1; mes <= MESES; mes++){
+            for(int dia = 1; dia <= LocalDate.of(anio,mes,1).lengthOfMonth(); dia++){
+                switch (LocalDate.of(anio,mes,dia).getDayOfWeek()){
+                    case MONDAY:
+                        tablaMeses[mes-1][0]++;
+                        break;
+                    case TUESDAY:
+                        tablaMeses[mes-1][1]++;
+                        break;
+                    case WEDNESDAY:
+                        tablaMeses[mes-1][2]++;
+                        break;
+                    case THURSDAY:
+                        tablaMeses[mes-1][3]++;
+                        break;
+                    case FRIDAY:
+                        tablaMeses[mes-1][4]++;
+                        break;
+                    case SATURDAY:
+                        tablaMeses[mes-1][5]++;
+                        break;
+                    case SUNDAY:
+                        tablaMeses[mes-1][6]++;
+                        break;
+                }
+            }
+        }
+
+        // SALIDA POR PANTALLA
+
+        System.out.printf("\nAÑO %d \n", anio);
+        System.out.println("         L  M  X  J  V  S  D");
+        System.out.println("----------------------------");
+        for(int mes = 0; mes < tablaMeses.length; mes++){
+            System.out.printf ("Mes %s |", mes < 9 ? (" " + (mes + 1)) : (mes + 1));
+            for(int diaMes = 0; diaMes < tablaMeses[mes].length; diaMes++){
+                System.out.printf(" %d ", tablaMeses[mes][diaMes]);
+            }
+            System.out.println();
+        }
+    }
+}
